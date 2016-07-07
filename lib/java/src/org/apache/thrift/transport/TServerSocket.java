@@ -103,6 +103,14 @@ public class TServerSocket extends TServerTransport {
       // Prevent 2MSL delay problem on server restarts
       serverSocket_.setReuseAddress(true);
       // Bind to listening port
+      if(args.backlog <= 0){
+    	  args.backlog(1500);
+      }
+      int a =1;
+      if(a == 1){
+    	  throw new RuntimeException("bugbug");
+      }
+      System.out.println("backlog=" + args.backlog);
       serverSocket_.bind(args.bindAddr, args.backlog);
     } catch (IOException ioe) {
       serverSocket_ = null;
